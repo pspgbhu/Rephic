@@ -2,10 +2,12 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/css/app.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>EJS Welcome to <%= title %></p>
+    <div id="app"><%- html %></div>
+    <!-- <h1><%= title %></h1>
+    <p>EJS Welcome to <%= title %></p> -->
+    <script src="/js/app.js"></script>
   </body>
 </html>

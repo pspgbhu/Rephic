@@ -1,23 +1,16 @@
 import React, { Component } from 'react';
-import ReactDOMServer from 'react-dom/server';
+import { Link } from 'react-router-dom';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+const Root = () => (
+  <div className="App">
+    <header className="App-header">
+      <h1 className="App-title">Welcome to React</h1>
+    </header>
+    <Link to="/home">Go To Home</Link>
+    <p className="App-intro">
+      To get started, edit <code>src/App.js</code> and save to reload.
+    </p>
+  </div>
+);
 
-console.log(ReactDOMServer.renderToString(
-  <App></App>
-));
-
-export default App;
+export default Root;
