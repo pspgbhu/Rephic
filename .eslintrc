@@ -29,6 +29,7 @@
   },
   "extends": "airbnb-base",
   "rules": {
+    "global-require": 0,
     "prefer-template": 0,
     "no-unused-vars": 1,
     "no-use-before-define": ["error", { "functions": false }],

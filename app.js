@@ -1,4 +1,8 @@
 require('babel-register')({
+  ignore: [
+    /(css|less)$/,
+    /node_modules/,
+  ],
   presets: [
     'es2015',
     'react',
@@ -9,10 +13,14 @@ require('babel-register')({
       polyfill: false,
       regenerator: true,
     }],
+    [
+      'babel-plugin-transform-require-ignore', {
+        extensions: ['.less'],
+      },
+    ],
   ],
   extensions: ['.jsx', '.js'],
 });
-
 
 const path = require('path');
 const Koa = require('koa');
@@ -21,6 +29,7 @@ const json = require('koa-json');
 const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
+const serve = require('koa-static');
 
 const index = require('./routes/index.jsx');
 
@@ -35,8 +44,20 @@ app.use(bodyparser({
 }));
 app.use(json());
 app.use(logger());
-app.use(require('koa-static')(path.join(__dirname, 'public')));
+
+/**
+ * 非生产环境下，.dev 中的静态资源会覆盖 public 中的资源
+ */
+if (process.env.NODE_ENV !== 'production') {
+  app.use(serve(path.join(__dirname, '.dev')));
+}
+
+app.use(serve(path.join(__dirname, 'public')));
+
 app.use(views(path.join(__dirname, 'views'), {
+  map: {
+    html: 'ejs',
+  },
   extension: 'ejs',
 }));
 

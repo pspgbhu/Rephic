@@ -1,23 +1,60 @@
 const gulp = require('gulp');
-const notify = require('gulp-notify');
-const build = require('./assets/build/build');
+const webpack = require('webpack');
+const notifier = require('node-notifier');
+const opn = require('opn');
+const chalk = require('chalk');
 
-gulp.task('default', ['watch']);
+const webpackDevConfig = require('./build/webpack.dev');
+const webpackProdConfig = require('./build/webpack.prod');
 
-gulp.task('watch', () => {
-  watch();
+gulp.task('default', ['dev']);
+
+gulp.task('dev', () => {
+  process.env.NODE_ENV = 'development';
+  const compiler = webpack(webpackDevConfig);
+
+  notifier.notify({
+    title: 'Notification',
+    message: 'Webpack watching assets modify',
+  });
+
+  console.log(chalk.yellow('building...'));
+  let first = true;
+  const watching = compiler.watch({
+    ignored: /node_modules/,
+  }, (err, stats) => {
+    if (webpackOutputHandler(err, stats)) {
+      if (!first) return;
+      first = false;
+      opn('http://localhost:3000');
+      compiler.run(webpackOutputHandler);
+    }
+  });
 });
 
-function watch() {
-  notify({
-    message: 'watching ./assets/src',
+
+gulp.task('build', () => {
+  process.env.NODE_ENV = 'production';
+  const compiler = webpack(webpackProdConfig);
+  compiler.run(webpackOutputHandler);
+});
+
+
+function webpackOutputHandler(err, stats) {
+  if (err) throw err;
+
+  process.stdout.write(stats.toString({
+    colors: true,
+    modules: false,
+    children: false,
+    chunks: false,
+    chunkModules: false,
+  }) + '\n');
+
+  notifier.notify({
+    title: 'Notification',
+    message: 'Webpack has built assets.',
   });
 
-  gulp.watch('./assets/src/*', () => {
-    notify({
-      message: 'webpack rebuild assets',
-    });
-    console.log('webpack rebuilding assets');
-    build();
-  });
+  return true;
 }

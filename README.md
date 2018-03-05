@@ -4,15 +4,48 @@ React 同构直出。
 
 Koa2 + React + React-Router + Redux + Webpack + Gulp
 
-## Run
+## 目录结构
+
+```bash
+.
+├── app.js                # Node 程序主入口
+├── bin                   # Node 运行脚本
+│   └── www
+├── build                 # webpack 构建配置
+│   ├── webpack.base.js
+│   ├── webpack.dev.js
+│   └── webpack.prod.js
+├── client                # React 同构代码
+│   ├── App.jsx
+│   ├── Home.jsx
+│   ├── index.jsx
+│   ├── router.jsx        # 客户端路由文件（请在 routes.jsx 中写路由逻辑）
+│   ├── routes.jsx        # 页面路由，前后端公用此路由文件
+│   └── style             # 样式文件
+│       └── style.less
+├── gulpfile.js           # Gulp 配置文件
+├── package.json
+├── public                # 打包出的生产环境静态资源
+│   ├── css
+│   │   └── style.css
+│   └── js
+│       └── app.js
+├── routes                # 服务端路由
+│   └── index.jsx
+├── views                 # 页面模板文件
+│   ├── error.ejs
+│   └── index.ejs
+└── yarn.lock
+```
+
+## 开发
 
 ```bash
 npm run dev  # 启动 Node 服务，访问 http://localhost:3000/
-
-gulp  # 检测 /assets/src/ 文件夹下的文件变动，实时打包项目静态资源
 ```
 
-## Todo
+开发阶段 webpack 会将静态资源打包至 `.dev` 文件夹下。在开发环境下，`.dev` 和 `public` 均为静态资源文件，且 `.dev` 文件夹下的资源匹配的优先级更高。
+
+# Todo
 
 - [ ] Working with Redux.
-- [ ] 由于引入了 babel-register 导致 nodemon 不能正常检测文件变动

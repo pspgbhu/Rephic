@@ -1,18 +1,24 @@
 const path = require('path');
+const chalk = require('chalk');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
+const rootPath = path.resolve(__dirname, '../');
+
+process.env.NODE_ENV = process.env.NODE_ENV || 'production';
+console.log(chalk.yellow('Webpack mode:', process.env.NODE_ENV));
+
 const config = {
-  // mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  mode: process.env.NODE_ENV,
 
   entry: {
-    app: path.resolve(__dirname, 'src/index.jsx'),
+    app: path.resolve(rootPath, 'client/index.jsx'),
   },
 
   output: {
-    path: path.resolve(__dirname, '../public'),
-    filename: 'js/[name].js',
+    path: path.resolve(rootPath, 'public'),
+    filename: 'js/app.js',
     libraryTarget: 'umd',
   },
 
@@ -28,7 +34,7 @@ const config = {
       },
       {
         test: /\.(js|jsx|mjs)$/,
-        include: path.resolve(__dirname, 'src'),
+        include: path.resolve(rootPath, 'client'),
         loader: require.resolve('babel-loader'),
         options: {
 
@@ -57,7 +63,6 @@ const config = {
               },
             },
             {
-              // loader: require.resolve('less-loader'),
               loader: 'less-loader',
             },
             {
@@ -88,7 +93,7 @@ const config = {
     new UglifyJSPlugin(),
 
     new ExtractTextPlugin({
-      filename: '../public/css/[name].css',
+      filename: 'css/style.css',
     }),
   ],
 };
