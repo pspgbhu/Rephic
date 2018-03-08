@@ -12,7 +12,7 @@
 ```
 git clone https://github.com/pspgbhu/react-isomorphic.git
 cd react-isomorphic
-npm install
+yarn install
 ```
 
 ## 运行
