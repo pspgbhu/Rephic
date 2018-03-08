@@ -1,0 +1,14 @@
+{
+  "name"   : "react-isomorphic",
+  "script" : "bin/www",
+  "watch": false,
+  "env": {
+      "NODE_ENV": "production",
+      "PORT": "3000"
+  },
+  "out_file": "/export/Logs/react-isomorphic/out.log",
+  "error_file": "/export/Logs/react-isomorphic/err.log",
+  "merge_logs": true,
+  "log_date_format": "YYYY-MM-DD HH:mm Z",
+  "max_memory_restart" : "512M"
+}
