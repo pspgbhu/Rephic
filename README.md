@@ -1,4 +1,4 @@
-# React isomorphic
+# React Isomorphic
 
 基于 Koa 的 React 同构直出模板。支持 React-Router, Redux 以及 less。
 
