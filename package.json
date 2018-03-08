@@ -4,12 +4,12 @@
   "private": false,
   "author": "pspgbhu <brotherchun001@gmail.com>",
   "scripts": {
-    "start": "node bin/www",
-    "prd": "pm2 start bin/www",
+    "start": "cross-env NODE_ENV=production node bin/www",
     "build": "gulp build",
+    "prd": "pm2 start bin/www",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
-    "dev:server": "./node_modules/.bin/nodemon bin/www -e js,jsx,json",
-    "dev:client": "gulp dev"
+    "dev:server": "./node_modules/.bin/nodemon bin/www",
+    "dev:client": "gulp watch"
   },
   "dependencies": {
     "autoprefixer": "^8.0.0",
@@ -58,11 +58,11 @@
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "style-loader": "^0.20.2",
     "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^4.1.0",
-    "webpack-dev-server": "^2.11.1",
     "webpack-isomorphic-tools": "^3.0.5",
     "webpack-merge": "^4.1.2"
   },
@@ -73,5 +73,17 @@
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-react": "^7.7.0",
     "nodemon": "^1.8.1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "build",
+      ".dev",
+      ".git",
+      "node_modules/**/node_modules"
+    ],
+    "ext": "js json jsx",
+    "env": {
+      "NODE_ENV": "development"
+    }
   }
 }

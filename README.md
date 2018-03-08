@@ -2,7 +2,7 @@
 
 React 同构直出。
 
-Koa2 + React + React-Router + Redux + Webpack + Gulp
+Koa2 + React + React-Router + Redux + Webpack + Gulp + less
 
 ## 目录结构
 
@@ -41,10 +41,21 @@ Koa2 + React + React-Router + Redux + Webpack + Gulp
 ## 开发
 
 ```bash
-npm run dev  # 启动 Node 服务，访问 http://localhost:3000/
+npm run dev  # 启动 Node 服务，支持 Node 和 jsx 的热更新
 ```
 
-开发阶段 webpack 会将静态资源打包至 `.dev` 文件夹下。在开发环境下，`.dev` 和 `public` 均为静态资源文件，且 `.dev` 文件夹下的资源匹配的优先级更高。
+开发阶段 webpack 会将静态资源打包至 `.dev` 文件夹下。在开发环境下，`/.dev` 和 `/public` 均为静态资源文件夹，且 `/.dev` 文件夹下的资源匹配的优先级更高。
+
+生产环境下，`/public` 将是唯一的静态资源文件夹。
+
+
+## 构建
+
+```bash
+npm run build   # 构建生产环境静态资源
+```
+编译 jsx 和 less 到 `/public` 文件夹下。
+
 
 # Todo
 

@@ -1,8 +1,4 @@
 require('babel-register')({
-  ignore: [
-    /(css|less)$/,
-    /node_modules/,
-  ],
   presets: [
     'es2015',
     'react',
@@ -15,7 +11,7 @@ require('babel-register')({
     }],
     [
       'babel-plugin-transform-require-ignore', {
-        extensions: ['.less'],
+        extensions: ['.less', '.sass', '.css'],
       },
     ],
   ],
@@ -31,7 +27,7 @@ const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const serve = require('koa-static');
 
-const index = require('./routes/index.jsx');
+const index = require('./routes');
 
 const app = new Koa();
 
@@ -44,6 +40,8 @@ app.use(bodyparser({
 }));
 app.use(json());
 app.use(logger());
+
+console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
 
 /**
  * 非生产环境下，.dev 中的静态资源会覆盖 public 中的资源

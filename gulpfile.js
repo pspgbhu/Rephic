@@ -7,11 +7,11 @@ const chalk = require('chalk');
 const webpackDevConfig = require('./build/webpack.dev');
 const webpackProdConfig = require('./build/webpack.prod');
 
-gulp.task('default', ['dev']);
+gulp.task('default', ['watch']);
 
-gulp.task('dev', () => {
-  process.env.NODE_ENV = 'development';
+gulp.task('watch', () => {
   const compiler = webpack(webpackDevConfig);
+  console.log(chalk.yellow('Webpack mode:', webpackDevConfig.mode));
 
   notifier.notify({
     title: 'Notification',
@@ -19,23 +19,24 @@ gulp.task('dev', () => {
   });
 
   console.log(chalk.yellow('building...'));
+
   let first = true;
   const watching = compiler.watch({
     ignored: /node_modules/,
   }, (err, stats) => {
-    if (webpackOutputHandler(err, stats)) {
-      if (!first) return;
-      first = false;
-      opn('http://localhost:3000');
-      compiler.run(webpackOutputHandler);
-    }
+    webpackOutputHandler(err, stats);
+    if (!first) return;
+
+    first = false;
+    // opn('http://localhost:3000');
+    compiler.run(webpackOutputHandler);
   });
 });
 
 
 gulp.task('build', () => {
-  process.env.NODE_ENV = 'production';
   const compiler = webpack(webpackProdConfig);
+  console.log(chalk.yellow('Webpack mode:', webpackProdConfig.mode));
   compiler.run(webpackOutputHandler);
 });
 
@@ -55,6 +56,4 @@ function webpackOutputHandler(err, stats) {
     title: 'Notification',
     message: 'Webpack has built assets.',
   });
-
-  return true;
 }
