@@ -1,62 +1,92 @@
 # React isomorphic
 
-React 同构直出。
+基于 Koa 的 React 同构直出模板。支持 React-Router, Redux 以及 less。
 
-Koa2 + React + React-Router + Redux + Webpack + Gulp + less
+## 环境要求
+
+- Node >= 7.9
+- PM2
+
+## 安装
+
+```
+git clone https://github.com/pspgbhu/react-isomorphic.git
+cd react-isomorphic
+npm install
+```
+
+## 运行
+
+### 开发
+
+```bash
+npm run dev  # 启动 Node 服务，支持 Node, jsx, less 的热更新
+```
+
+开发阶段 webpack 会将静态资源打包至 `.dev` 文件夹下。在开发环境下，`/.dev` 和 `/public` 均为静态资源文件夹，且 `/.dev` 文件夹下的资源匹配的优先级更高。
+
+而生产环境下，`/public` 将是唯一的静态资源文件夹
+
+### 生产
+
+```bash
+npm run build   # 构建生产环境静态资源，将会更新 /public 文件下的资源
+npm run prd     # 启动 pm2
+```
+
 
 ## 目录结构
 
 ```bash
 .
-├── app.js                # Node 程序主入口
-├── bin                   # Node 运行脚本
-│   └── www
-├── build                 # webpack 构建配置
-│   ├── webpack.base.js
-│   ├── webpack.dev.js
-│   └── webpack.prod.js
-├── client                # React 同构代码
-│   ├── App.jsx
-│   ├── Home.jsx
-│   ├── index.jsx
-│   ├── router.jsx        # 客户端路由文件（请在 routes.jsx 中写路由逻辑）
-│   ├── routes.jsx        # 页面路由，前后端公用此路由文件
-│   └── style             # 样式文件
-│       └── style.less
-├── gulpfile.js           # Gulp 配置文件
+├── app.js                # 程序入口文件
+├── bin
+│   └── www               # 程序启动脚本
+├── build                 # Webpack 配置
+│   ├── webpack.base.js
+│   ├── webpack.dev.js
+│   └── webpack.prod.js
+├── client                # Client Only Code
+│   └── index.jsx
+├── common                # 客户端和服务端共享代码, React 同构代码
+│   ├── App.jsx           # React 入口文件
+│   ├── Author.jsx
+│   ├── Root.jsx
+│   ├── actions
+│   │   └── index.js
+│   ├── components
+│   ├── containers
+│   ├── reducers
+│   │   └── index.js
+│   └── style
+│       ├── demo.css
+│       └── style.less
+├── controllers           # Controllers
+│   └── index.js
+├── gulpfile.js           # Gulp 配置
+├── middlewares           # Koa 中间件
+├── package-lock.json
 ├── package.json
-├── public                # 打包出的生产环境静态资源
-│   ├── css
-│   │   └── style.css
-│   └── js
-│       └── app.js
-├── routes                # 服务端路由
-│   └── index.jsx
+├── public                # 静态资源文件
+│   ├── css
+│   │   └── style.css
+│   └── js
+│       └── app.js
+├── routes                # Koa 路由
+│   ├── api
+│   └── index.js
+├── utils                 # 工具函数
+│   ├── index.js
+│   └── render.jsx
 ├── views                 # 页面模板文件
-│   ├── error.ejs
-│   └── index.ejs
+│   ├── error.ejs
+│   └── index.ejs
 └── yarn.lock
+
 ```
 
-## 开发
+## Q&A
 
-```bash
-npm run dev  # 启动 Node 服务，支持 Node 和 jsx 的热更新
-```
+**1. 在本地运行，页面打开时会出现一瞬间的页面无样式**
 
-开发阶段 webpack 会将静态资源打包至 `.dev` 文件夹下。在开发环境下，`/.dev` 和 `/public` 均为静态资源文件夹，且 `/.dev` 文件夹下的资源匹配的优先级更高。
-
-生产环境下，`/public` 将是唯一的静态资源文件夹。
-
-
-## 构建
-
-```bash
-npm run build   # 构建生产环境静态资源
-```
-编译 jsx 和 less 到 `/public` 文件夹下。
-
-
-# Todo
-
-- [ ] Working with Redux.
+在本地开发时，CSS 样式文件是打包在 JS 文件中的，待到 JS 执行时才将其插入进页面中。 在生产环境下，CSS 文件将会被单独打包出来，生产环境下不会出现这种情况。
