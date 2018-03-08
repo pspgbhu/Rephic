@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { render } from 'react-dom';
+import { render, hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -22,7 +22,7 @@ const store = createStore(state => state, preloadedState, applyMiddleware(
   logger,
 ));
 
-render(
+hydrate(
   <Provider store={store}>
     <BrowserRouter>
       <App></App>
