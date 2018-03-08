@@ -43,46 +43,17 @@ npm run prd     # 启动 pm2
 ├── bin
 │   └── www               # 程序启动脚本
 ├── build                 # Webpack 配置
-│   ├── webpack.base.js
-│   ├── webpack.dev.js
-│   └── webpack.prod.js
 ├── client                # Client Only Code
-│   └── index.jsx
 ├── common                # 客户端和服务端共享代码, React 同构代码
 │   ├── App.jsx           # React 入口文件
-│   ├── Author.jsx
-│   ├── Root.jsx
-│   ├── actions
-│   │   └── index.js
-│   ├── components
-│   ├── containers
-│   ├── reducers
-│   │   └── index.js
-│   └── style
-│       ├── demo.css
-│       └── style.less
+│   └── style             # 支持 less 样式
 ├── controllers           # Controllers
-│   └── index.js
 ├── gulpfile.js           # Gulp 配置
 ├── middlewares           # Koa 中间件
-├── package-lock.json
-├── package.json
 ├── public                # 静态资源文件
-│   ├── css
-│   │   └── style.css
-│   └── js
-│       └── app.js
 ├── routes                # Koa 路由
-│   ├── api
-│   └── index.js
 ├── utils                 # 工具函数
-│   ├── index.js
-│   └── render.jsx
-├── views                 # 页面模板文件
-│   ├── error.ejs
-│   └── index.ejs
-└── yarn.lock
-
+└── views                 # 页面模板文件
 ```
 
 ## Q&A
