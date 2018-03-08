@@ -1,8 +1,6 @@
 require('babel-register')({
   presets: [
-    'es2015',
     'react',
-    'stage-2',
   ],
   plugins: [
     ['transform-runtime', {
@@ -15,7 +13,7 @@ require('babel-register')({
       },
     ],
   ],
-  extensions: ['.jsx', '.js'],
+  extensions: ['.jsx'],
 });
 
 const path = require('path');

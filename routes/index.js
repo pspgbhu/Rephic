@@ -1,9 +1,6 @@
-import Router from 'koa-router';
-import { createStore } from 'redux';
-import renderStaticHtml from '../utils/render';
-// import { getAuthorInfo } from '../controllers';
-
-const router = Router();
+const router = require('koa-router')();
+const { createStore } = require('redux');
+const renderStaticHtml = require('../utils/render').default;
 
 /**
  * 可以增加路由对一些页面进行额外的处理和数据传递
