@@ -28,7 +28,7 @@ gulp.task('watch', () => {
     if (!first) return;
 
     first = false;
-    // opn('http://localhost:3000');
+    opn('http://localhost:3000');
     compiler.run(webpackOutputHandler);
   });
 });
