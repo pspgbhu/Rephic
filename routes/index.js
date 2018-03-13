@@ -5,18 +5,10 @@ const renderStaticHtml = require('../utils/render').default;
 /**
  * 可以增加路由对一些页面进行额外的处理和数据传递
  */
-// router.get('/author', async (ctx) => {
-//   const context = {};
-//   const store = createStore(state => state, { info: await getAuthorInfo() });
-//   const content = renderStaticHtml({ ctx, store, context });
-//   const preloadedState = store.getState();
-
-//   await ctx.render('index', {
-//     NODE_ENV: process.env.NODE_ENV,
-//     html: content,
-//     state: JSON.stringify(preloadedState),
-//   });
-// });
+router.get('/author', async (ctx, next) => {
+  ctx.reactState = { author: 'pspgbhu' };
+  await next();
+});
 
 
 /**
@@ -24,11 +16,12 @@ const renderStaticHtml = require('../utils/render').default;
  */
 router.get('*', filterPageRoute, async (ctx) => {
   const context = {};
-  const store = createStore(state => state, {});
+  const store = createStore(state => state, ctx.reactState || {});
   const content = renderStaticHtml({ ctx, store, context });
   const preloadedState = store.getState();
 
   await ctx.render('index', {
+    title: 'React Isomorphic',
     NODE_ENV: process.env.NODE_ENV,
     html: content,
     state: JSON.stringify(preloadedState),

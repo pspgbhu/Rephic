@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { render, hydrate } from 'react-dom';
+import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';

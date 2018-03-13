@@ -14,8 +14,8 @@ gulp.task('watch', () => {
   console.log(chalk.yellow('Webpack mode:', webpackDevConfig.mode));
 
   notifier.notify({
-    title: 'Notification',
-    message: 'Webpack watching assets modify',
+    title: 'Webpack Notification',
+    message: 'Webpack is watching assets modify...',
   });
 
   console.log(chalk.yellow('building...'));
@@ -52,8 +52,8 @@ function webpackOutputHandler(err, stats) {
     chunkModules: false,
   }) + '\n');
 
-  notifier.notify({
-    title: 'Notification',
-    message: 'Webpack has built assets.',
-  });
+  // notifier.notify({
+  //   title: 'Notification',
+  //   message: 'Webpack has built assets.',
+  // });
 }

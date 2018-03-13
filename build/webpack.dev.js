@@ -2,7 +2,6 @@ const path = require('path');
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 const autoprefixer = require('autoprefixer');
-const chalk = require('chalk');
 
 const config = merge(baseConfig, {
   mode: 'development',
@@ -11,6 +10,8 @@ const config = merge(baseConfig, {
     path: path.resolve(__dirname, '../.dev'),
     filename: 'js/[name].js',
   },
+
+  devtool: 'cheap-module-source-map',
 
   module: {
     rules: [
