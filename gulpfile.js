@@ -26,9 +26,10 @@ gulp.task('watch', () => {
     ignored: /node_modules/,
   }, (err, stats) => {
     webpackOutputHandler(err, stats);
-    if (!first) return;
 
+    if (!first) return;
     first = false;
+
     opn('http://localhost:3000');
     compiler.run(webpackOutputHandler);
   });
@@ -37,6 +38,7 @@ gulp.task('watch', () => {
 
 gulp.task('build', () => {
   process.env.NODE_ENV = 'production';
+
   const compiler = webpack(webpackProdConfig);
   console.log(chalk.yellow('Webpack mode:', webpackProdConfig.mode));
   compiler.run(webpackOutputHandler);

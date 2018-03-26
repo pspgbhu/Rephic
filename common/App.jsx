@@ -2,8 +2,9 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import Author from './Author';
 
+// 样式文件需要使用 require 引入，这样 babel-register 才能正确的忽略这些样式文件
 require('./style/style.less');
-require('./style/demo.css');
+require('./style/demo.scss');
 
 const Root = () => (
   <div className="App">

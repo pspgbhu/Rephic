@@ -3,6 +3,24 @@ const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 const autoprefixer = require('autoprefixer');
 
+const postcssOpts = {
+  ident: 'postcss',
+  plugins: () => [
+    require('postcss-flexbugs-fixes'),
+    autoprefixer({
+      browsers: [
+        '>1%',
+        'Android > 4',
+        'iOS > 7',
+        'last 4 versions',
+        'Firefox ESR',
+        'not ie < 9', // React doesn't support IE8 anyway
+      ],
+      flexbox: 'no-2009',
+    }),
+  ],
+};
+
 const config = merge(baseConfig, {
   mode: 'development',
 
@@ -16,39 +34,47 @@ const config = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.(css|less)$/,
-        use: [
+        test: /\.css$/,
+        use: ['style-loader',
           {
-            loader: require.resolve('style-loader'),
+            loader: 'css-loader',
+            options: { importLoaders: 1 },
           },
           {
-            loader: require.resolve('css-loader'),
-            options: {
-              importLoaders: 1,
-              minimize: true,
-              sourceMap: process.env.NODE_ENV === 'production',
-            },
+            loader: 'postcss-loader',
+            options: postcssOpts,
+          },
+        ],
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader',
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 },
           },
           {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              ident: 'postcss',
-              plugins: () => [
-                require('postcss-flexbugs-fixes'),
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9', // React doesn't support IE8 anyway
-                  ],
-                  flexbox: 'no-2009',
-                }),
-              ],
-            },
+            loader: 'postcss-loader',
+            options: postcssOpts,
           },
           {
-            loader: require.resolve('less-loader'),
+            loader: 'less-loader',
+          },
+        ],
+      },
+      {
+        test: /\.(sass|scss)$/,
+        use: ['style-loader',
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 },
+          },
+          {
+            loader: 'postcss-loader',
+            options: postcssOpts,
+          },
+          {
+            loader: 'sass-loader',
           },
         ],
       },
