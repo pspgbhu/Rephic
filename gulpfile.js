@@ -10,6 +10,7 @@ const webpackProdConfig = require('./build/webpack.prod');
 gulp.task('default', ['watch']);
 
 gulp.task('watch', () => {
+  process.env.NODE_ENV = 'development';
   const compiler = webpack(webpackDevConfig);
   console.log(chalk.yellow('Webpack mode:', webpackDevConfig.mode));
 
@@ -35,6 +36,7 @@ gulp.task('watch', () => {
 
 
 gulp.task('build', () => {
+  process.env.NODE_ENV = 'production';
   const compiler = webpack(webpackProdConfig);
   console.log(chalk.yellow('Webpack mode:', webpackProdConfig.mode));
   compiler.run(webpackOutputHandler);
