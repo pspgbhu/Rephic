@@ -12,12 +12,13 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
+import reducer from '../common/reducers';
 import App from '../common/App';
 
 // 通过服务端注入的全局变量得到初始的 state
 const preloadedState = window.__INITIAL_STATE_;
 
-const store = createStore(state => state, preloadedState, applyMiddleware(
+const store = createStore(reducer, preloadedState, applyMiddleware(
   thunk,
   logger,
 ));
