@@ -17,7 +17,7 @@ require('babel-register')({
       },
     ],
   ],
-  extensions: ['.jsx'],
+  extensions: ['.jsx', '.js'],
 });
 
 /**
