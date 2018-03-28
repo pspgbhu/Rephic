@@ -9,10 +9,20 @@
 
 ## 安装
 
+你可以通过 smarter 脚手架生成工具来安装该模板：
+
+```bash
+$ npm i -g smarter                       # 全局安装 smarter
+$ smarter init react-isomorphic project  # 生成项目到 project 目录下
 ```
-git clone https://github.com/pspgbhu/react-isomorphic.git
-cd react-isomorphic
-yarn install
+
+或者直接 clone 该项目：
+
+```
+$ git clone https://github.com/pspgbhu/react-isomorphic.git
+$ cd react-isomorphic
+$ rm -rf .git && git init
+$ yarn install
 ```
 
 ## 运行
@@ -33,7 +43,6 @@ npm run dev  # 启动 Node 服务，支持 Node, jsx, less 的热更新
 npm run build   # 构建生产环境静态资源，将会更新 /public 文件下的资源
 npm run prd     # 启动 pm2
 ```
-
 
 ## 目录结构
 
