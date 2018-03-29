@@ -13,7 +13,7 @@ const Root = () => (
     </header>
     <Link to="/author">Jump to other page by react router</Link>
     <div style={{ marginTop: '60px' }}>
-      <a href="https://github.com/pspgbhu/react-isomorphic">查看更多帮助信息</a>
+      <a href="https://github.com/pspgbhu/react-isomorphic#react-isomorphic">查看更多帮助信息</a>
     </div>
   </div>
 );

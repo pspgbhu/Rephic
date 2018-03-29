@@ -13,7 +13,7 @@ require('babel-register')({
     }],
     [
       'babel-plugin-transform-require-ignore', {
-        extensions: ['.less', '.sass', '.css', '.scss', 'sass'],
+        extensions: ['.css', '.less', '.sass', '.scss'],
       },
     ],
   ],
