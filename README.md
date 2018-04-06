@@ -32,7 +32,7 @@
 <a id="markdown-环境要求" name="环境要求"></a>
 ## 环境要求
 
-- Node >= 7.9
+- Node.js >= 7.9
 - PM2（用户生产环境）
 
 <a id="markdown-安装" name="安装"></a>
