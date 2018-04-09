@@ -68,7 +68,7 @@
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.2",
     "uglifyjs-webpack-plugin": "^1.2.2",
-    "webpack": "^4.1.0",
+    "webpack": "^4.5.0",
     "webpack-isomorphic-tools": "^3.0.5",
     "webpack-merge": "^4.1.2"
   },

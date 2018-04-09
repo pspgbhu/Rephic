@@ -12,26 +12,21 @@ gulp.task('default', ['watch']);
 gulp.task('watch', () => {
   process.env.NODE_ENV = 'development';
   const compiler = webpack(webpackDevConfig);
+
   console.log(chalk.yellow('Webpack mode:', webpackDevConfig.mode));
-
-  notifier.notify({
-    title: 'Webpack Notification',
-    message: 'Webpack is watching assets modify...',
-  });
-
-  console.log(chalk.yellow('building...'));
+  console.log(chalk.yellow('Webpack is building...'));
 
   let first = true;
+
   const watching = compiler.watch({
     ignored: /node_modules/,
   }, (err, stats) => {
     webpackOutputHandler(err, stats);
 
-    if (!first) return;
-    first = false;
-
-    opn('http://localhost:3000');
-    compiler.run(webpackOutputHandler);
+    if (first) {
+      opn('http://localhost:3000');
+      first = false;
+    }
   });
 });
 
