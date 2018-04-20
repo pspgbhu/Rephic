@@ -7,7 +7,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node bin/www",
     "build": "gulp build",
-    "prd": "pm2 start pm2.config.json bin/www",
+    "prd": "pm2 start server/pm2.config.json bin/www",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
     "dev:server": "./node_modules/.bin/nodemon bin/www",
     "dev:client": "gulp watch"

@@ -9,7 +9,7 @@ const config = {
   },
 
   output: {
-    path: path.resolve(rootPath, 'public'),
+    path: path.resolve(rootPath, 'server/public'),
     filename: 'js/app.js',
   },
 

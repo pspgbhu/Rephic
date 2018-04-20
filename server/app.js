@@ -27,7 +27,7 @@ console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
  * 非生产环境下，.dev 中的静态资源会覆盖 public 中的资源
  */
 if (process.env.NODE_ENV !== 'production') {
-  app.use(serve(path.join(__dirname, '.dev')));
+  app.use(serve(path.join(__dirname, '../.dev')));
 }
 
 app.use(serve(path.join(__dirname, 'public')));

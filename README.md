@@ -5,7 +5,6 @@
 
 <a id="markdown-目录" name="目录"></a>
 ## 目录
-
 <!-- TOC -->
 
 - [React Isomorphic](#react-isomorphic)
@@ -15,19 +14,20 @@
   - [运行](#运行)
     - [开发环境下运行](#开发环境下运行)
     - [生产环境下运行](#生产环境下运行)
-  - [目录结构](#目录结构)
+  - [开发注意事项](#开发注意事项)
+    - [1. React 在服务端的生命周期和客户端的不同](#1-react-在服务端的生命周期和客户端的不同)
+    - [2. Node 环境中是不具备 DOM 和 BOM 相关API](#2-node-环境中是不具备-dom-和-bom-相关api)
+  - [模板目录结构](#模板目录结构)
   - [开发帮助](#开发帮助)
     - [我该怎么在该脚手架的基础上继续开发页面？](#我该怎么在该脚手架的基础上继续开发页面)
     - [如何正确的引入样式文件?](#如何正确的引入样式文件)
     - [我想新增几个页面](#我想新增几个页面)
-  - [注意事项](#注意事项)
-    - [1. React 在服务端的生命周期和客户端的不同](#1-react-在服务端的生命周期和客户端的不同)
-    - [2. Node 环境中是不具备 DOM 和 BOM 相关API](#2-node-环境中是不具备-dom-和-bom-相关api)
   - [Q&A](#qa)
     - [1. 在开发环境下运行，页面打开时会出现一瞬间的页面无样式](#1-在开发环境下运行页面打开时会出现一瞬间的页面无样式)
-    - [2. window is not defined 或者 document is not defined](#2-window-is-not-defined-或者-document-is-not-defined)
+    - [2. 报错 'window is not defined' 或 'document is not defined'](#2-报错-window-is-not-defined-或-document-is-not-defined)
 
 <!-- /TOC -->
+
 
 <a id="markdown-环境要求" name="环境要求"></a>
 ## 环境要求
@@ -41,10 +41,10 @@
 你可以通过 [smarter](https://github.com/jd-smart-fe/smarter) 脚手架生成工具来安装该模板：
 
 ```bash
-$ npm i -g smarter                       # 全局安装 smarter
-$ smarter create react-isomorphic project  # 生成项目到 project 目录下
+$ npm i -g smarter                          # 全局安装 smarter
+$ smarter create react-isomorphic project   # 生成项目到 project 目录下
 $ cd project
-$ yarn                                   # 推荐使用 yarn 来安装项目依赖
+$ yarn                                      # 推荐使用 yarn 来安装项目依赖
 ```
 
 或者直接 clone 该项目：
@@ -66,9 +66,9 @@ $ yarn
 npm run dev  # 启动 Node 服务，支持 Node, jsx, less 的热更新
 ```
 
-开发阶段 webpack 会将静态资源打包至 `.dev` 文件夹下。在开发环境下，`/.dev` 和 `/public` 均为静态资源文件夹，且 `/.dev` 文件夹下的资源匹配的优先级更高。
+开发阶段 webpack 会将静态资源打包至 `.dev` 文件夹下。在开发环境下，`/.dev` 和 `/server/public` 均为静态资源文件夹，且 `/.dev` 文件夹下的资源匹配的优先级更高。
 
-而生产环境下，`/public` 将是唯一的静态资源文件夹
+而生产环境下，`/server/public` 将是唯一的静态资源文件夹
 
 <a id="markdown-生产环境下运行" name="生产环境下运行"></a>
 ### 生产环境下运行
@@ -78,26 +78,51 @@ npm run build   # 构建生产环境静态资源，将会更新 /public 文件�
 npm run prd     # 启动 pm2
 ```
 
-<a id="markdown-目录结构" name="目录结构"></a>
-## 目录结构
+<a id="markdown-开发注意事项" name="开发注意事项"></a>
+## 开发注意事项
+
+<a id="markdown-1-react-在服务端的生命周期和客户端的不同" name="1-react-在服务端的生命周期和客户端的不同"></a>
+### 1. React 在服务端的生命周期和客户端的不同
+
+服务端中 React 的生命周期只走到了 `componentWillMount()`。但是在客户端 React 拥有着完整的生命周期。
+
+<a id="markdown-2-node-环境中是不具备-dom-和-bom-相关api" name="2-node-环境中是不具备-dom-和-bom-相关api"></a>
+### 2. Node 环境中是不具备 DOM 和 BOM 相关API
+
+`/common` 中的同构代码在 Node 环境和浏览器环境下都会执行一遍，因此一定要注意的是，Node 没有 `window` `document` 等对象以及相关 API，如果在 Node 环境下执行了便会报错。
+
+但是我们在很多场景下还是需要用到 DOM 和 BOM 的 API，这里还是有一些处理技巧的：
+
+- Node 中 React 生命周期只会走到 `componentWillMount`，因此我们可以将一些 DOM 操作放在该生命周期之后的一些钩子中，比如在 `componentDidMount` 中来执行 DOM 或 BOM 的 API。
+- 或者，我们可以使用一些安全判断来保证只在浏览器环境下才执行 DOM 操作。
+  ```js
+  // node 中没有 document 全局对象，因此便不会执行括号中的代码。
+  if (document) {
+    document.querySelector('#example').classList.add('hide');
+  }
+  ```
+
+<a id="markdown-模板目录结构" name="模板目录结构"></a>
+## 模板目录结构
 
 ```bash
 .
-├── app.js                # 程序入口文件
-├── bin
-│   └── www               # 程序启动脚本
+├── bin                   # 项目脚本文件
 ├── build                 # Webpack 配置
-├── client                # Client Only Code
-├── common                # 客户端和服务端共享代码, React 同构代码
-│   ├── App.jsx           # React 入口文件
-│   └── style             # 支持 less 样式
-├── controllers           # Controllers
-├── gulpfile.js           # Gulp 配置
-├── middlewares           # Koa 中间件
-├── public                # 静态资源文件
-├── routes                # Koa 路由
-├── utils                 # 工具函数
-└── views                 # 页面模板文件
+├── client                # 客户端专用代码
+├── common                # 前端后端同构代码
+│   └── App.jsx           # 一定要将 App.jsx 作为整个 common 文件夹的入口文件
+└── server                # 服务端专用代码
+    ├── app.js            # Node 服务入口文件
+    ├── controllers       # controller 层
+    ├── middlewares       # 中间件
+    ├── public            # 静态资源
+    ├── routes            # 路由
+    │   ├── api           # API 路由
+    │   ├── index.js      # 全部路由的入口文件
+    │   └── views         # 页面路由
+    ├── utils             # 工具函数
+    └── views             # ejs 渲染模板
 ```
 
 <a id="markdown-开发帮助" name="开发帮助"></a>
@@ -128,7 +153,7 @@ npm run prd     # 启动 pm2
 
 `/client/index.jsx` 作为浏览器环境下的入口文件，初始化了客户端的 Redux 初始数据。
 
-服务端的 Redux Store 数据首先在 koa-router 中被创建，然后在 `/utils/render.jsx` 中被传递进 `/common/App.jsx` 组件中，然后 React 在服务端中便能像在前端中一样使用 Redux 中的数据了。
+服务端的 Redux Store 数据首先在 koa-router 中被创建，然后在 `/server/utils/render.jsx` 中被传递进 `/common/App.jsx` 组件中，然后 React 在服务端中便能像在前端中一样使用 Redux 中的数据了。
 
 ```js
 // /routes/views/index.js
@@ -143,32 +168,6 @@ router.get('*', filterPageRoute, async (ctx) => {
 });
 ```
 
-
-<a id="markdown-注意事项" name="注意事项"></a>
-## 注意事项
-
-<a id="markdown-1-react-在服务端的生命周期和客户端的不同" name="1-react-在服务端的生命周期和客户端的不同"></a>
-### 1. React 在服务端的生命周期和客户端的不同
-
-服务端中 React 的生命周期只走到了 `componentWillMount()`。但是在客户端 React 拥有着完整的生命周期。
-
-<a id="markdown-2-node-环境中是不具备-dom-和-bom-相关api" name="2-node-环境中是不具备-dom-和-bom-相关api"></a>
-### 2. Node 环境中是不具备 DOM 和 BOM 相关API
-
-`/common` 中的同构代码在 Node 环境和浏览器环境下都会执行一遍，因此一定要注意的是，Node 没有 `window` `document` 等对象以及相关 API，如果在 Node 环境下执行了便会报错。
-
-但是我们在很多场景下还是需要用到 DOM 和 BOM 的 API，这里还是有一些处理技巧的：
-
-- Node 中 React 生命周期只会走到 `componentWillMount`，因此我们可以将一些 DOM 操作放在该生命周期之后的一些钩子中，比如在 `componentDidMount` 中来执行 DOM 或 BOM 的 API。
-- 或者，我们可以使用一些安全判断来保证只在浏览器环境下才执行 DOM 操作。
-  ```js
-  // node 中没有 document 全局对象，因此便不会执行括号中的代码。
-  if (document) {
-    document.querySelector('#example').classList.add('hide');
-  }
-  ```
-
-
 <a id="markdown-qa" name="qa"></a>
 ## Q&A
 
@@ -181,7 +180,7 @@ router.get('*', filterPageRoute, async (ctx) => {
 
 在生产环境下，webpack 会将 CSS 作为单独的一个文件打包出来，因此**生产环境下不会有这个问题。**
 
-<a id="markdown-2-window-is-not-defined-或者-document-is-not-defined" name="2-window-is-not-defined-或者-document-is-not-defined"></a>
-### 2. window is not defined 或者 document is not defined
+<a id="markdown-2-报错-window-is-not-defined-或-document-is-not-defined" name="2-报错-window-is-not-defined-或-document-is-not-defined"></a>
+### 2. 报错 'window is not defined' 或 'document is not defined'
 
-参考[注意事项 - Node 环境中是不具备 DOM 和 BOM 相关API](#markdown-2-node-环境中是不具备-dom-和-bom-相关api)
+参考 [注意事项 - Node 环境中是不具备 DOM 和 BOM 相关API](#markdown-2-node-环境中是不具备-dom-和-bom-相关api)

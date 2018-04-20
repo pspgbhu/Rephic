@@ -2,7 +2,7 @@ const router = require('koa-router')();
 const { createStore, applyMiddleware } = require('redux');
 const thunk = require('redux-thunk').default;
 const renderStaticHtml = require('../../utils/render').default;
-const reducer = require('../../common/reducers').default;
+const reducer = require('../../../common/reducers').default;
 const routeAuthor = require('./author');
 
 router.use(routeAuthor.routes());
