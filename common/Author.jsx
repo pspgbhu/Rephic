@@ -17,6 +17,7 @@ class Author extends Component {
         <p>Email: {email}</p>
         <p>GitHub: <a href="https://github.com/pspgbhu">Pspgbhu's GitHub</a></p>
         <p>Site: <a href="http://pspgbhu.me">http://pspgbhu.me</a></p>
+        <p>关于服务端渲染时到底需要初始化多少数据到 Redux 中的一些建议：</p>
         <p style={{ maxWidth: '800px' }}>
           当我们直接访问 /author 页面时，Name 和 Email 由服务端直接渲染出来。
           但是当我们直接访问其他页面时，/author 页面的数据就没有必要由服务端直接储存在 Redux Store 中。当通过 React Router 由前端跳转至 /author 页面时，将会去异步的获取 Name 和 Email 的值。
