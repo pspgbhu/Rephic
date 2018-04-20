@@ -5,19 +5,20 @@
 
 <a id="markdown-目录" name="目录"></a>
 ## 目录
+
 <!-- TOC -->
 
 - [React Isomorphic](#react-isomorphic)
   - [目录](#目录)
   - [环境要求](#环境要求)
   - [安装](#安装)
+  - [模板目录结构](#模板目录结构)
   - [运行](#运行)
     - [开发环境下运行](#开发环境下运行)
     - [生产环境下运行](#生产环境下运行)
   - [开发注意事项](#开发注意事项)
     - [1. React 在服务端的生命周期和客户端的不同](#1-react-在服务端的生命周期和客户端的不同)
     - [2. Node 环境中是不具备 DOM 和 BOM 相关API](#2-node-环境中是不具备-dom-和-bom-相关api)
-  - [模板目录结构](#模板目录结构)
   - [开发帮助](#开发帮助)
     - [我该怎么在该脚手架的基础上继续开发页面？](#我该怎么在该脚手架的基础上继续开发页面)
     - [如何正确的引入样式文件?](#如何正确的引入样式文件)
@@ -27,7 +28,6 @@
     - [2. 报错 'window is not defined' 或 'document is not defined'](#2-报错-window-is-not-defined-或-document-is-not-defined)
 
 <!-- /TOC -->
-
 
 <a id="markdown-环境要求" name="环境要求"></a>
 ## 环境要求
@@ -55,6 +55,30 @@ $ cd react-isomorphic
 $ rm -rf .git && git init                # 重新初始化 git 仓库
 $ yarn
 ```
+
+<a id="markdown-模板目录结构" name="模板目录结构"></a>
+## 模板目录结构
+
+```bash
+.
+├── bin                   # 项目脚本文件
+├── build                 # Webpack 配置
+├── client                # 客户端专用代码
+├── common                # 前端后端同构代码
+│   └── App.jsx           # 一定要将 App.jsx 作为整个 common 文件夹的入口文件
+└── server                # 服务端专用代码
+    ├── app.js            # Node 服务入口文件
+    ├── controllers       # controller 层
+    ├── middlewares       # 中间件
+    ├── public            # 静态资源
+    ├── routes            # 路由
+    │   ├── api           # API 路由
+    │   ├── index.js      # 全部路由的入口文件
+    │   └── views         # 页面路由
+    ├── utils             # 工具函数
+    └── views             # ejs 渲染模板
+```
+
 
 <a id="markdown-运行" name="运行"></a>
 ## 运行
@@ -101,29 +125,6 @@ npm run prd     # 启动 pm2
     document.querySelector('#example').classList.add('hide');
   }
   ```
-
-<a id="markdown-模板目录结构" name="模板目录结构"></a>
-## 模板目录结构
-
-```bash
-.
-├── bin                   # 项目脚本文件
-├── build                 # Webpack 配置
-├── client                # 客户端专用代码
-├── common                # 前端后端同构代码
-│   └── App.jsx           # 一定要将 App.jsx 作为整个 common 文件夹的入口文件
-└── server                # 服务端专用代码
-    ├── app.js            # Node 服务入口文件
-    ├── controllers       # controller 层
-    ├── middlewares       # 中间件
-    ├── public            # 静态资源
-    ├── routes            # 路由
-    │   ├── api           # API 路由
-    │   ├── index.js      # 全部路由的入口文件
-    │   └── views         # 页面路由
-    ├── utils             # 工具函数
-    └── views             # ejs 渲染模板
-```
 
 <a id="markdown-开发帮助" name="开发帮助"></a>
 ## 开发帮助
