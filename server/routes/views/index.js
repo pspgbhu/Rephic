@@ -10,7 +10,7 @@ router.use(routeAuthor.routes());
 /**
  * 返回统一的默认页面
  */
-router.get('*', filterPageRoute, async (ctx) => {
+router.get('*', filterPageRoute, async (ctx, next) => {
   const context = {};
   // 在服务端创建 Redux Store
   const store = createStore(reducer, ctx.reactState || {}, applyMiddleware(thunk));
@@ -26,6 +26,8 @@ router.get('*', filterPageRoute, async (ctx) => {
     html: content,
     state: JSON.stringify(preloadedState),
   });
+
+  await next();
 });
 
 
