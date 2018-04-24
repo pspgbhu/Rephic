@@ -46,8 +46,8 @@
 ```bash
 $ npm i -g smarter                          # 全局安装 smarter
 $ smarter create react-isomorphic project   # 生成项目到 project 目录下
-$ cd project
-$ yarn                                      # 推荐使用 yarn 来安装项目依赖
+$ cd project                      
+$ npm i                                     # 使用 npm 来安装项目依赖
 ```
 
 或者直接 clone 该项目：
