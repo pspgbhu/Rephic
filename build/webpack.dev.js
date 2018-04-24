@@ -1,7 +1,13 @@
-const path = require('path');
 const merge = require('webpack-merge');
-const baseConfig = require('./webpack.base');
 const autoprefixer = require('autoprefixer');
+const baseConfig = require('./webpack.base');
+
+// add hot-reload related code to entry chunks
+// Object.keys(baseConfig.entry).forEach((name) => {
+//   baseConfig.entry[name] = [
+//     'webpack-hot-middleware/client?noInfo=true&reload=true',
+//   ].concat(baseConfig.entry[name]);
+// });
 
 const postcssOpts = {
   ident: 'postcss',
@@ -24,18 +30,14 @@ const postcssOpts = {
 const config = merge(baseConfig, {
   mode: 'development',
 
-  output: {
-    path: path.resolve(__dirname, '../.dev'),
-    filename: 'js/[name].js',
-  },
-
   devtool: 'cheap-module-source-map',
 
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader',
+        use: [
+          'style-loader',
           {
             loader: 'css-loader',
             options: { importLoaders: 1 },
@@ -48,7 +50,8 @@ const config = merge(baseConfig, {
       },
       {
         test: /\.less$/,
-        use: ['style-loader',
+        use: [
+          'style-loader',
           {
             loader: 'css-loader',
             options: { importLoaders: 1 },
@@ -64,7 +67,8 @@ const config = merge(baseConfig, {
       },
       {
         test: /\.(sass|scss)$/,
-        use: ['style-loader',
+        use: [
+          'style-loader',
           {
             loader: 'css-loader',
             options: { importLoaders: 1 },
@@ -80,6 +84,9 @@ const config = merge(baseConfig, {
       },
     ],
   },
+
+  plugins: [
+  ],
 });
 
 module.exports = config;

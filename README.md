@@ -19,13 +19,16 @@
   - [开发注意事项](#开发注意事项)
     - [1. React 在服务端的生命周期和客户端的不同](#1-react-在服务端的生命周期和客户端的不同)
     - [2. Node 环境中是不具备 DOM 和 BOM 相关API](#2-node-环境中是不具备-dom-和-bom-相关api)
+    - [3. 生产环境和开发环境下的静态文件来源的不同](#3-生产环境和开发环境下的静态文件来源的不同)
   - [开发帮助](#开发帮助)
     - [我该怎么在该脚手架的基础上继续开发页面？](#我该怎么在该脚手架的基础上继续开发页面)
     - [如何正确的引入样式文件?](#如何正确的引入样式文件)
     - [我想新增几个页面](#我想新增几个页面)
+    - [Nodemon 使用技巧](#nodemon-使用技巧)
   - [Q&A](#qa)
     - [1. 在开发环境下运行，页面打开时会出现一瞬间的页面无样式](#1-在开发环境下运行页面打开时会出现一瞬间的页面无样式)
     - [2. 报错 'window is not defined' 或 'document is not defined'](#2-报错-window-is-not-defined-或-document-is-not-defined)
+    - [3. 暂不支持文件修改后自动刷新页面](#3-暂不支持文件修改后自动刷新页面)
 
 <!-- /TOC -->
 
@@ -126,6 +129,15 @@ npm run prd     # 启动 pm2
   }
   ```
 
+<a id="markdown-3-生产环境和开发环境下的静态文件来源的不同" name="3-生产环境和开发环境下的静态文件来源的不同"></a>
+### 3. 生产环境和开发环境下的静态文件来源的不同
+
+在生产环境下，默认使用 `/server/public` 文件夹作为静态资源文件夹。
+
+但是在开发环境下，我们在 `koa-static` 中间件之前引入了 `webpack-dev-middleware` 中间件，这样 webpack 生产的静态资源便有着更高的匹配优先级。
+
+**因此在开发环境下，我们会优先使用来自 webpack-dev-middleware 打包出的静态资源。**
+
 <a id="markdown-开发帮助" name="开发帮助"></a>
 ## 开发帮助
 
@@ -169,6 +181,13 @@ router.get('*', filterPageRoute, async (ctx) => {
 });
 ```
 
+<a id="markdown-nodemon-使用技巧" name="nodemon-使用技巧"></a>
+### Nodemon 使用技巧
+
+Nodemon 是一款非常实用的 Node.js 开发工具，它能够用来监控 Node.js 源代码的任何变化和自动重启你的服务器。这里有几个技巧或许可以帮到你。
+
+1. **nodemon 启动后，在终端再次输入 rs 命令可以强制重启 Node.js 服务**
+
 <a id="markdown-qa" name="qa"></a>
 ## Q&A
 
@@ -185,3 +204,8 @@ router.get('*', filterPageRoute, async (ctx) => {
 ### 2. 报错 'window is not defined' 或 'document is not defined'
 
 参考 [注意事项 - Node 环境中是不具备 DOM 和 BOM 相关API](#markdown-2-node-环境中是不具备-dom-和-bom-相关api)
+
+<a id="markdown-3-暂不支持文件修改后自动刷新页面" name="3-暂不支持文件修改后自动刷新页面"></a>
+### 3. 暂不支持文件修改后自动刷新页面
+
+目前是用 nodemon 来检测 js 变动来重启 node 服务。目前并没有计划加入浏览器自动刷新的功能。

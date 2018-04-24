@@ -8,9 +8,9 @@ const routeAuthor = require('./author');
 router.use(routeAuthor.routes());
 
 /**
- * 返回统一的默认页面
+ * 任何请求都会打到这条路由上返回统一的默认页面，除了路径中含有符号 “.” 的情况。
  */
-router.get('*', filterPageRoute, async (ctx, next) => {
+router.get(/^[^.]*$/, async (ctx, next) => {
   const context = {};
   // 在服务端创建 Redux Store
   const store = createStore(reducer, ctx.reactState || {}, applyMiddleware(thunk));
@@ -30,18 +30,5 @@ router.get('*', filterPageRoute, async (ctx, next) => {
   await next();
 });
 
-
-/**
- * 通常一些静态资源都会通过 Nginx 直接处理掉了，但是我们还是在 Node 里做了额外的处理。
- *
- * 将那些不属于页面地址的链接过滤出去，不进行路由处理。
- */
-async function filterPageRoute(ctx, next) {
-  // .xxx 结尾的不是 React 路由路径
-  if (ctx.path.match(/\.\w*$/)) {
-    return;
-  }
-  await next();
-}
 
 module.exports = router;
