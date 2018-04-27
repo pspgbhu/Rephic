@@ -11,9 +11,9 @@ router.use(routeAuthor.routes());
  * 任何请求都会打到这条路由上返回统一的默认页面。
  * 下述情况除外：
  * 1. 路径中含有 “.” 符号
- * 2. 以 /api/ 开头的请求
+ * 2. 以 /api 开头的请求
  */
-router.get(/^(?!\/api\/)[^.]*$/, async (ctx, next) => {
+router.get(/^\/(?!api)[^.]*$/, async (ctx, next) => {
   const context = {};
   // 在服务端创建 Redux Store
   const store = createStore(reducer, ctx.reactState || {}, applyMiddleware(thunk));
