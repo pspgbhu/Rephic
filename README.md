@@ -44,7 +44,7 @@
 你可以通过 [smarter](https://github.com/jd-smart-fe/smarter) 脚手架生成工具来安装该模板：
 
 ```bash
-$ npm i -g smarter                          # 全局安装 smarter
+$ sudo npm i -g smarter                     # 全局安装 smarter
 $ smarter create react-isomorphic project   # 生成项目到 project 目录下
 $ cd project                      
 $ npm i                                     # 使用 npm 来安装项目依赖
