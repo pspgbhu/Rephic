@@ -1,14 +1,14 @@
-<a id="markdown-react-isomorphic" name="react-isomorphic"></a>
-# React Isomorphic
+<a id="markdown-rephic" name="rephic"></a>
+# Rephic
 
-基于 Koa 的 React 同构直出模板。支持 React-Router, Redux 以及 Less, Sass。
+Rephic 是一个基于 Koa 的 React 服务端渲染模板。支持 React-Router, Redux 以及 Less, Sass。
 
 <a id="markdown-目录" name="目录"></a>
 ## 目录
 
 <!-- TOC -->
 
-- [React Isomorphic](#react-isomorphic)
+- [Rephic](#rephic)
   - [目录](#目录)
   - [环境要求](#环境要求)
   - [安装](#安装)
@@ -46,7 +46,7 @@
 ```bash
 $ sudo npm i -g smarter                     # 全局安装 smarter
 $ smarter create react-isomorphic project   # 生成项目到 project 目录下
-$ cd project                      
+$ cd project
 $ npm i                                     # 使用 npm 来安装项目依赖
 ```
 
