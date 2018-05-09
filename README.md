@@ -45,7 +45,7 @@ Rephic 是一个基于 Koa 的 React 服务端渲染模板。支持 React-Router
 
 ```bash
 $ sudo npm i -g smarter                     # 全局安装 smarter
-$ smarter create react-isomorphic project   # 生成项目到 project 目录下
+$ smarter create rephic project             # 生成项目到 project 目录下
 $ cd project
 $ npm i                                     # 使用 npm 来安装项目依赖
 ```
@@ -53,10 +53,10 @@ $ npm i                                     # 使用 npm 来安装项目依赖
 或者直接 clone 该项目：
 
 ```bash
-$ git clone https://github.com/pspgbhu/react-isomorphic.git
-$ cd react-isomorphic
-$ rm -rf .git && git init                # 重新初始化 git 仓库
-$ yarn
+$ git clone https://github.com/pspgbhu/rephic.git
+$ cd rephic
+$ rm -rf .git && git init                   # 重新初始化 git 仓库
+$ npm i
 ```
 
 <a id="markdown-模板目录结构" name="模板目录结构"></a>
