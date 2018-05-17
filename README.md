@@ -45,7 +45,7 @@ Rephic 是一个基于 Koa 的 React 服务端渲染模板。支持 React-Router
 
 ```bash
 $ sudo npm i -g smarter                     # 全局安装 smarter
-$ smarter create rephic project             # 生成项目到 project 目录下
+$ smarter init rephic project               # 生成项目到 project 目录下
 $ cd project
 $ npm i                                     # 使用 npm 来安装项目依赖
 ```
