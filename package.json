@@ -7,8 +7,10 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node bin/www",
     "build": "node build/build.js",
-    "dev": "./node_modules/.bin/nodemon bin/www",
-    "prd": "pm2 start server/pm2.config.json bin/www"
+    "prd": "pm2 start server/pm2.config.json bin/www",
+    "dev": "npm run dev:client & npm run dev:server",
+    "dev:server": "./node_modules/.bin/nodemon bin/www",
+    "dev:client": "gulp watch"
   },
   "dependencies": {
     "autoprefixer": "^8.0.0",
@@ -33,6 +35,7 @@
     "ejs": "~2.5.5",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
+    "gulp": "^3.9.1",
     "history": "^4.7.2",
     "koa": "^2.2.0",
     "koa-bodyparser": "^3.2.0",
@@ -79,7 +82,8 @@
   "nodemonConfig": {
     "ignore": [
       ".git",
-      "node_modules/**/node_modules"
+      "node_modules/**/node_modules",
+      "server/public"
     ],
     "ext": "js json jsx",
     "env": {

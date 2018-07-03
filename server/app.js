@@ -6,9 +6,7 @@ const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const serve = require('koa-static');
-const chalk = require('chalk');
 const index = require('./routes');
-const webpackDevServer = require('./middlewares/webpackDevServer');
 
 const app = new Koa();
 
@@ -24,10 +22,8 @@ app.use(bodyparser({
 app.use(json());
 app.use(logger());
 
-// webpackDevServer
 if (process.env.NODE_ENV !== 'production') {
-  console.log(chalk.yellow('NOTICE: You are running application in development environment!'));
-  webpackDevServer(app);
+  app.use(serve(path.join(__dirname, '../node_modules/.cache/rephic/public')));
 }
 
 app.use(serve(path.join(__dirname, 'public')));

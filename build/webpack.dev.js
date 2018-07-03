@@ -1,3 +1,4 @@
+const path = require('path');
 const merge = require('webpack-merge');
 const autoprefixer = require('autoprefixer');
 const baseConfig = require('./webpack.base');
@@ -29,6 +30,12 @@ const postcssOpts = {
 
 const config = merge(baseConfig, {
   mode: 'development',
+
+  output: {
+    path: path.resolve(__dirname, '../node_modules/.cache/rephic/public'),
+    filename: 'js/[name].js',
+    publicPath: '/',
+  },
 
   devtool: 'cheap-module-source-map',
 

@@ -1,17 +1,8 @@
 const path = require('path');
-const autoprefixer = require('autoprefixer');
-
-const rootPath = path.resolve(__dirname, '../');
 
 const config = {
   entry: {
-    app: path.resolve(rootPath, 'client/index.jsx'),
-  },
-
-  output: {
-    path: path.resolve(rootPath, 'server/public'),
-    filename: 'js/[name].js',
-    publicPath: '/',
+    app: path.resolve(__dirname, '../client/index.jsx'),
   },
 
   resolve: {

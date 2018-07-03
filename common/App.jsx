@@ -18,7 +18,6 @@ const Root = () => (
   </div>
 );
 
-
 const App = () => ((
   <div>
     <Route exact path="/" component={Root}></Route>
