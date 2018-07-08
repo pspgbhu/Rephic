@@ -1,4 +1,4 @@
-exports.getAuthorInfo = () => new Promise((resolve) => {
+exports.getInfo = () => new Promise((resolve) => {
   // 模拟异步获取数据的情况
   setTimeout(() => {
     resolve({
