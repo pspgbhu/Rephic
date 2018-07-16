@@ -70,15 +70,13 @@ $ npm i
 │   └── App.jsx           # 一定要将 App.jsx 作为整个 common 文件夹的入口文件
 └── server                # 服务端专用代码
     ├── app.js            # Node 服务入口文件
-    ├── controllers       # controller 层
+    ├── router.js         # 路由
+    ├── controller        # 控制器层
+    ├── service           # 服务层
     ├── middlewares       # 中间件
     ├── public            # 静态资源
-    ├── routes            # 路由
-    │   ├── api           # API 路由
-    │   ├── index.js      # 全部路由的入口文件
-    │   └── views         # 页面路由
     ├── utils             # 工具函数
-    └── views             # ejs 渲染模板
+    └── views             # 渲染模板
 ```
 
 
@@ -96,7 +94,7 @@ npm run dev
 # 这个请不要担心，在生产环境下不存在这个问题。
 ```
 
-开发阶段 webpack 会将静态资源打包至 `.dev` 文件夹下。在开发环境下，`/.dev` 和 `/server/public` 均为静态资源文件夹，且 `/.dev` 文件夹下的资源匹配的优先级更高。
+开发阶段 webpack 会将静态资源打包至 `node_modules/.cache/rephic/public/` 文件夹下。且开发环境下该文件夹和 `/server/public` 均为静态资源文件夹，且该文件夹下的资源匹配的优先级更高。
 
 而生产环境下，`/server/public` 将是唯一的静态资源文件夹
 
@@ -145,11 +143,17 @@ npm run prd     # 启动 pm2
 <a id="markdown-3-生产环境和开发环境下的静态文件来源的不同" name="3-生产环境和开发环境下的静态文件来源的不同"></a>
 ### 3. 生产环境和开发环境下的静态文件来源的不同
 
-在生产环境下，默认使用 `/server/public` 文件夹作为静态资源文件夹。
+生产环境静态资源目录
 
-但是在开发环境下，我们在 `koa-static` 中间件之前引入了 `webpack-dev-middleware` 中间件，这样 webpack 生产的静态资源便有着更高的匹配优先级。
+- `/server/public`
 
-**因此在开发环境下，我们会优先使用来自 webpack-dev-middleware 打包出的静态资源。**
+开发环境静态资源目录
+
+- `/node_modules/.cache/rephic/public`
+    开发环境下的临时资源都会被打包进这个目录。静态资源会优先匹配这个目录下的文件。
+
+- `/server/public`
+    开发环境下，仍会加载这个目录的资源，只不过优先级较低。
 
 <a id="markdown-开发帮助" name="开发帮助"></a>
 ## 开发帮助

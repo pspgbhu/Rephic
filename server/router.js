@@ -1,6 +1,6 @@
-const base = require('./controllers/views/base');
-const author = require('./controllers/views/author');
-const authorInfo = require('./controllers/api/authorInfo');
+const base = require('./controller/views/base');
+const author = require('./controller/views/author');
+const authorInfo = require('./controller/api/authorInfo');
 
 const router = require('koa-router')();
 
