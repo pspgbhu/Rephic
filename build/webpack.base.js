@@ -16,6 +16,11 @@ const config = {
         loader: require.resolve('babel-loader'),
         options: {
           cacheDirectory: true,
+          presets: [
+            'es2015',
+            'react',
+            'stage-2'
+          ],
         },
       },
 
