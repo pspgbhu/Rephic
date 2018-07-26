@@ -12,7 +12,7 @@
     <meta name="browsermode" content="application">
     <meta name="screen-orientation" content="portrait">
     <title><%= title %></title>
-    <% if(NODE_ENV === 'production' || NODE_ENV === 'clientrender') { %>
+    <% if(NODE_ENV === 'production') { %>
       <link rel='stylesheet' href='/css/style.css' />
     <% } %>
   </head>
@@ -21,6 +21,9 @@
     <script>
       window.__INITIAL_STATE_ = <%- state %>;
     </script>
+    <% if(NODE_ENV === 'production') { %>
+      <script src="/js/vendors.js"></script>
+    <% } %>
     <script src="/js/app.js"></script>
   </body>
 </html>

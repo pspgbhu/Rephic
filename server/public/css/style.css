@@ -1,1 +1,14 @@
-body{padding:50px;font:14px Lucida Grande,Helvetica,Arial,sans-serif}a{color:#00b7ff}.demo{display:-webkit-flex;display:-ms-flexbox;display:flex;color:#3c9}
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color: #00B7FF;
+}
+
+.demo {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  color: #33cc99; }
+
