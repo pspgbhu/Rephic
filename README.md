@@ -61,22 +61,26 @@ $ npm i
 <a id="markdown-模板目录结构" name="模板目录结构"></a>
 ## 模板目录结构
 
+下面只列出了几个需要重点关注的目录文件
+
 ```bash
 .
 ├── bin                   # 项目脚本文件
-├── build                 # Webpack 配置
+│   └── www               # 服务端启动脚本
 ├── client                # 客户端专用代码
-├── common                # 前端后端同构代码
-│   └── App.jsx           # 一定要将 App.jsx 作为整个 common 文件夹的入口文件
+│   ├── build             # Webpack 配置
+│   ├── entry             # 入口文件目录，包含客户端和服务端的入口
+│   ├── store             # Redux 相关文件
+│   └── App.jsx           # React 根组件
 └── server                # 服务端专用代码
-    ├── app.js            # Node 服务入口文件
-    ├── router.js         # 路由
     ├── controller        # 控制器层
     ├── service           # 服务层
     ├── middlewares       # 中间件
     ├── public            # 静态资源
     ├── utils             # 工具函数
-    └── views             # 渲染模板
+    ├── views             # 渲染模板
+    ├── app.js            # Node 服务入口文件
+    └── router.js         # 路由
 ```
 
 
