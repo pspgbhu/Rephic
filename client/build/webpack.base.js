@@ -1,7 +1,8 @@
 const path = require('path');
-const devMode = process.env.NODE_ENV !== 'production';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
+
+const devMode = process.env.NODE_ENV !== 'production';
 
 const postcssOpts = {
   ident: 'postcss',
@@ -23,7 +24,7 @@ const postcssOpts = {
 
 const config = {
   entry: {
-    app: path.resolve(__dirname, '../client/index.jsx'),
+    app: path.resolve(__dirname, '../app/entry/client.js'),
   },
 
   resolve: {
@@ -40,7 +41,7 @@ const config = {
           presets: [
             'es2015',
             'react',
-            'stage-2'
+            'stage-2',
           ],
           plugins: [
             'syntax-dynamic-import',

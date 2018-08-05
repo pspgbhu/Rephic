@@ -1,14 +1,14 @@
 const { createStore, applyMiddleware } = require('redux');
 const thunk = require('redux-thunk').default;
-const renderStaticHtml = require('../../utils/render').default;
-const reducer = require('../../../common/reducers').default;
+const { renderToString } = require('react-dom/server');
+const { App, reducer } = require('../../../client/app/entry/server');
 
 module.exports = async (ctx, next) => {
   const context = {};
   // 在服务端创建 Redux Store
   const store = createStore(reducer, ctx.reactState || {}, applyMiddleware(thunk));
   // 生成 html 字符串
-  const content = renderStaticHtml({ ctx, store, context });
+  const content = renderToString(App({ ctx, store, context }));
   // 从 Store 中获取 State 对象
   const preloadedState = store.getState();
 

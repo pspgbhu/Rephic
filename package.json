@@ -6,7 +6,7 @@
   "site": "http://pspgbhu.me",
   "scripts": {
     "start": "cross-env NODE_ENV=production node bin/www",
-    "build": "cross-env NODE_ENV=production node build/build.js",
+    "build": "cross-env NODE_ENV=production node client/build/build.js",
     "prd": "pm2 start server/pm2.config.json bin/www",
     "dev": "npm run dev:client & npm run dev:server",
     "dev:server": "./node_modules/.bin/nodemon bin/www",

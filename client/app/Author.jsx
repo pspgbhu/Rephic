@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchInfo } from './actions';
+import { fetchInfo } from './store/action';
 
 class Author extends Component {
   componentWillMount() {

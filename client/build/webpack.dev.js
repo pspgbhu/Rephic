@@ -14,7 +14,7 @@ const config = merge(baseConfig, {
   mode: 'development',
 
   output: {
-    path: path.resolve(__dirname, '../node_modules/.cache/rephic/public'),
+    path: path.resolve(__dirname, '../../node_modules/.cache/rephic/public'),
     filename: 'js/[name].js',
     publicPath: '/',
   },

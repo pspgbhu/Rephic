@@ -1,7 +1,5 @@
 /**
- * 此文件只会被客户端所引用，为了保证前后端路由的一致性，
- * 请不要在此文件写入路由逻辑！
- * 请只在 /common/App.jsx 中编辑路由逻辑。
+ * 浏览器端入口文件
  */
 
 import React from 'react';
@@ -12,8 +10,8 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-import reducer from '../common/reducers';
-import App from '../common/App';
+import reducer from '../store/reducer';
+import App from '../App';
 
 // 通过服务端注入的全局变量得到初始的 state
 const preloadedState = window.__INITIAL_STATE_;

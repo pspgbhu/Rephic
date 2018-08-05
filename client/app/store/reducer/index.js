@@ -4,7 +4,7 @@ import {
   FETCH_INFO_ERROR,
   FETCH_INFO_SUCCESS,
   FETCH_INFO_CACHED,
-} from '../actions';
+} from '../action';
 
 const authorInfo = (state = {}, action) => {
   switch (action.type) {

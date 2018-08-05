@@ -4,7 +4,7 @@ const notifier = require('node-notifier');
 const opn = require('opn');
 const chalk = require('chalk');
 
-const webpackDevConfig = require('./build/webpack.dev');
+const webpackDevConfig = require('./client/build/webpack.dev');
 
 gulp.task('default', ['watch']);
 
