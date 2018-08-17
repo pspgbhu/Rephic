@@ -10,7 +10,7 @@ const router = require('./router');
 
 const app = new Koa();
 
-console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
+console.log('[Rephic] process.env.NODE_ENV ===', process.env.NODE_ENV);
 
 // error handler
 onerror(app);

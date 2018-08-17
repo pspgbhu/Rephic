@@ -12,8 +12,8 @@ gulp.task('watch', () => {
   process.env.NODE_ENV = 'development';
   const compiler = webpack(webpackDevConfig);
 
-  console.log(chalk.yellow('Webpack mode:', webpackDevConfig.mode));
-  console.log(chalk.yellow('Webpack is building...'));
+  console.log(chalk.yellow('[Rephic] Webpack mode:', webpackDevConfig.mode));
+  console.log(chalk.yellow('[Rephic] Webpack is building...'));
 
   let first = true;
 

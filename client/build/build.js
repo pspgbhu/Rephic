@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const chalk = require('chalk');
 const webpackProdConfig = require('./webpack.prod');
 
-console.log(chalk.yellow('Webpack mode:', webpackProdConfig.mode));
+console.log(chalk.yellow('[Rephic] Webpack mode:', webpackProdConfig.mode));
 
 const compiler = webpack(webpackProdConfig);
 compiler.run((err, stats) => {
